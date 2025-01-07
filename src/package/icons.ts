@@ -15,7 +15,7 @@ export type RemixIcon = {
 for (let i = 0; i < content.length; i++) {
   const key = content[i][0].slice(2);
   parse_content.push({
-    key: camelToKebabWithNumbers(key),
+    key,
     Component: content[i][1],
   });
 }
