@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { icons } from "./icons";
+import { RemixIcons } from "./icons";
 import { cn } from "./lib/utils";
 import { ClassValue } from "clsx";
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -13,20 +13,24 @@ export const StaticGrid = ({
   current_selected,
   className,
   classNameIcons,
+  onClick,
   ...props
 }: Props) => {
   return (
     <div className={cn([className])} {...props}>
-      {icons.map(({ Component, key }) => {
+      {RemixIcons.map(({ Component, key }) => {
         if (key === current_selected) {
           return (
-            <span className={cn([isSelected, classNameIcons])}>
+            <span
+              className={cn([isSelected, classNameIcons])}
+              onClick={onClick}
+            >
               <Component />
             </span>
           );
         }
         return (
-          <span className={cn([classNameIcons])}>
+          <span className={cn([classNameIcons])} onClick={onClick}>
             <Component key={key} />
           </span>
         );
