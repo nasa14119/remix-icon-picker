@@ -8,7 +8,7 @@ import * as remix_icons from "@remixicon/react";
 
 const parse_content = [];
 const content = Object.entries(remix_icons);
-type Icon = {
+export type RemixIcon = {
   key: string;
   Component: remix_icons.RemixiconComponentType;
 };
@@ -20,4 +20,4 @@ for (let i = 0; i < content.length; i++) {
   });
 }
 
-export const icons = [...parse_content] as Icon[];
+export const RemixIcons = [...parse_content] as RemixIcon[];
