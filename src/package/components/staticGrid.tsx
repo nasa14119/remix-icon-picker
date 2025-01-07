@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
-import { RemixIcons } from "./icons";
-import { cn } from "./lib/utils";
+import { RemixIconsList } from "../icons.ts";
+import { cn } from "../lib/utils";
 import { ClassValue } from "clsx";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   current_selected?: string;
@@ -17,8 +17,8 @@ export const StaticGrid = ({
   ...props
 }: Props) => {
   return (
-    <div className={cn([className])} {...props}>
-      {RemixIcons.map(({ Component, key }) => {
+    <div className={cn(["flex flex-wrap", className])} {...props}>
+      {RemixIconsList.map(({ Component, key }) => {
         if (key === current_selected) {
           return (
             <span
