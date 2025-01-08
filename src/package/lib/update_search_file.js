@@ -9,7 +9,11 @@ for (const val in search) {
   if (val === "_comment") {
     continue;
   }
-  parse_search = { ...parse_search, ...search[val] };
+  let iteration = { ...search[val] };
+  for (const key in iteration) {
+    iteration[key] += `,${val.toLocaleLowerCase()}`;
+  }
+  parse_search = { ...parse_search, ...iteration };
 }
 
 try {
@@ -17,7 +21,7 @@ try {
     path.resolve(__dirname, "../search.json"),
     JSON.stringify(parse_search)
   );
-  formatSerchFile();
+  formatSerchFile(parse_search);
 } catch (error) {
   console.error(error);
 }

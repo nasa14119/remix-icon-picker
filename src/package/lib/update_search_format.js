@@ -1,13 +1,12 @@
 import fs from "fs";
 import path from "path";
-import search from "../search.json";
 const camelizeAndCapitalize = (s) => {
   // Convertir de kebab-case a camelCase
   const camelCase = s.replace(/-./g, (x) => x[1].toUpperCase());
   // Capitalizar la primera letra
   return camelCase[0].toUpperCase() + camelCase.slice(1);
 };
-export function formatSerchFile() {
+export function formatSerchFile(search) {
   const new_data = {};
   for (const mod_key of Object.keys(search).sort()) {
     new_data[camelizeAndCapitalize(mod_key)] = search[mod_key];
@@ -21,4 +20,3 @@ export function formatSerchFile() {
     console.error(error);
   }
 }
-formatSerchFile();
