@@ -9,15 +9,15 @@ import Icon from "./components/Icon";
 import Tooltip from "./components/Tooltip";
 
 export function StaticPicker({
-  changeIcon,
+  onIconChange,
   children,
-}: PropsWithChildren & { changeIcon?: (icon: RemixIcon) => void }) {
+}: PropsWithChildren & { onIconChange?: (icon: RemixIcon) => void }) {
   const [currentIcon, setIcon] =
     useState<StaticContextType["currentIcon"]>(null);
   const handleChange: StaticContextType["setNewIcon"] = (newIcon) => {
     setIcon(() => {
       const icon = getIcon(newIcon);
-      if (changeIcon) changeIcon(icon);
+      if (onIconChange) onIconChange(icon);
       return icon;
     });
   };
