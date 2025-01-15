@@ -1,40 +1,20 @@
-import { HTMLAttributes } from "react";
+import { cloneElement, HTMLAttributes, ReactElement } from "react";
 import { RemixIconsList } from "../icons.ts";
-import { cn } from "../lib/utils";
-import { ClassValue } from "clsx";
-interface Props extends HTMLAttributes<HTMLDivElement> {
+import { cn } from "@lib/utils";
+
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   current_selected?: string;
-  classNameIcons?: string;
-  isSelected?: ClassValue;
+  isSelected?: string;
+  children: ReactElement;
 }
 
-export const StaticGrid = ({
-  isSelected,
-  current_selected,
-  className,
-  classNameIcons,
-  onClick,
-  ...props
-}: Props) => {
+export const StaticGrid = ({ children, className, ...props }: Props) => {
+  if (!children) throw Error("Icon component must be provided");
   return (
     <div className={cn(["flex flex-wrap", className])} {...props}>
-      {RemixIconsList.map(({ Component, key }) => {
-        if (key === current_selected) {
-          return (
-            <span
-              className={cn([isSelected, classNameIcons])}
-              onClick={onClick}
-            >
-              <Component />
-            </span>
-          );
-        }
-        return (
-          <span className={cn([classNameIcons])} onClick={onClick}>
-            <Component key={key} />
-          </span>
-        );
-      })}
+      {RemixIconsList.map(({ Component, key }) =>
+        cloneElement(children, { id: key, Icon: Component, key })
+      )}
     </div>
   );
 };
