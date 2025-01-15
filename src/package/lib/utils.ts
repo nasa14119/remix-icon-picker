@@ -16,3 +16,20 @@ export function isSimilar(inp: string, str: string) {
   const normalizedStr = str.replace(/\s+/g, "").toLowerCase(); // Elimina todos los espacios y convierte a minúsculas
   return normalizedStr.startsWith(normalizedPart); // V
 }
+export function normalizeBiggerString(shorter: string, longer: string) {
+  if (!longer) return "";
+  const formatted = longer
+    .split("") // Divide el string largo en caracteres
+    .map((char, index) => {
+      if (index < shorter.length) {
+        // Aplica mayúscula o minúscula según el carácter en `shorter`
+        return shorter[index] === shorter[index].toUpperCase()
+          ? char.toUpperCase()
+          : char.toLowerCase();
+      }
+      return char; // Mantiene el resto del string igual
+    })
+    .join(""); // Une los caracteres formateados en un string
+
+  return formatted;
+}
