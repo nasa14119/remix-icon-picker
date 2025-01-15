@@ -15,7 +15,7 @@ export const IconSelected = ({
   id,
   defaultIcon,
   className,
-  legend = true,
+  legend = false,
   classNameLegend,
   classNameBg,
   classNameSVG,
