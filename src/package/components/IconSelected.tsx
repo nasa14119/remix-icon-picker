@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export interface Props extends Omit<IconProps, "id"> {
   id: StaticContextType["currentIcon"];
   defaultIcon?: KeyRemixObject;
-  classNameLegent?: ClassValue;
+  classNameLegend?: ClassValue;
   legend?: boolean;
 }
 export const IconSelected = ({
@@ -16,7 +16,7 @@ export const IconSelected = ({
   defaultIcon,
   className,
   legend = true,
-  classNameLegent,
+  classNameLegend,
   classNameBg,
   classNameSVG,
   ...props
@@ -39,7 +39,7 @@ export const IconSelected = ({
       {...props}
     >
       {legend && (
-        <span className={cn(["text-sm", classNameLegent])}>{curretntIcon}</span>
+        <span className={cn(["text-sm", classNameLegend])}>{curretntIcon}</span>
       )}
     </Icon>
   );

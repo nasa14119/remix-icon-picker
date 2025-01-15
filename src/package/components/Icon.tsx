@@ -21,7 +21,7 @@ export const Icon = ({
   if (!Icon) throw Error("Icon is not provided");
   return (
     <button
-      className={cn(["size-7 md:size-8 m-1", className, "relative group"])}
+      className={cn(["size-7 md:size-8 m-1 relative", className, "group"])}
       {...rest}
     >
       <Icon className={cn(["size-full", classNameSVG])} />

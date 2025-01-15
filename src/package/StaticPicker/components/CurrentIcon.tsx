@@ -1,8 +1,11 @@
-import { IconSelected } from "@components/IconSelected.tsx";
+import {
+  IconSelected,
+  Props as IconSelectedProps,
+} from "@components/IconSelected.tsx";
 import { useCurrentIcon } from "../hooks/context";
 
-const CurrentIcon = () => {
+const CurrentIcon = ({ ...props }: Omit<IconSelectedProps, "id">) => {
   const currentIcon = useCurrentIcon();
-  return <IconSelected id={currentIcon} />;
+  return <IconSelected {...props} id={currentIcon} />;
 };
 export default CurrentIcon;
