@@ -1,20 +1,20 @@
-import { HtmlHTMLAttributes } from "react";
+import { HtmlHTMLAttributes, PropsWithChildren } from "react";
 import { cn } from "@lib/utils";
-import { Autosuggest } from "./Autosuggest";
 
 type PropsInput = Omit<HtmlHTMLAttributes<HTMLInputElement>, "onChange">;
-interface Props extends Omit<HtmlHTMLAttributes<HTMLSpanElement>, "onChange"> {
-  autosuggest?: string;
+interface Props
+  extends Omit<HtmlHTMLAttributes<HTMLSpanElement>, "onChange">,
+    PropsWithChildren {
   value: string;
   onChange: (input: string) => void;
   inputProps: PropsInput;
 }
 export const InputTextPicker = ({
-  autosuggest,
   className,
   value,
   onChange,
   inputProps,
+  children,
   ...props
 }: Props) => {
   return (
@@ -28,9 +28,7 @@ export const InputTextPicker = ({
         value={value}
         {...inputProps}
       />
-      {typeof autosuggest !== "undefined" && (
-        <Autosuggest suggestion={autosuggest} />
-      )}
+      {children}
     </span>
   );
 };
