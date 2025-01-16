@@ -21,14 +21,18 @@ export const Icon = ({
   if (!Icon) throw Error("Icon is not provided");
   return (
     <button
-      className={cn(["size-7 md:size-8 m-1 relative", className, "group"])}
+      className={cn([
+        "size-8 md:size-9 m-1 relative rounded-xl p-1",
+        className,
+        "group",
+      ])}
       {...rest}
     >
       <Icon className={cn(["size-full", classNameSVG])} />
       {children}
       <span
         className={cn([
-          "absolute -inset-1 rounded-xl -z-30 group-hover:opacity-20 bg-[var(--text-color)] transition-opacity opacity-0",
+          "absolute inset-0 rounded-xl -z-30 group-hover:opacity-20 bg-[var(--text-color)] transition-opacity opacity-0",
           classNameBg,
         ])}
       ></span>

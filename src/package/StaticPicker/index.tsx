@@ -1,5 +1,5 @@
 // import { ClassValue } from "clsx";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useCallback, useState } from "react";
 import { RemixIcon, StaticContextType } from "@lib/types";
 import { getIcon } from "../icons.ts";
 import { StaticContext } from "./hooks/context";
@@ -7,6 +7,7 @@ import Grid from "./components/Grid";
 import CurrentIcon from "./components/CurrentIcon.tsx";
 import Icon from "./components/Icon";
 import Tooltip from "./components/Tooltip";
+import Input from "./components/Input";
 import { useFilterWithInput } from "@hooks/useFilterWithInput";
 
 export function StaticPicker({
@@ -25,6 +26,10 @@ export function StaticPicker({
       return icon;
     });
   };
+  const handleInput: StaticContextType["handleInput"] = useCallback(
+    setInputText,
+    [setInputText]
+  );
   return (
     <StaticContext.Provider
       value={{
@@ -32,7 +37,7 @@ export function StaticPicker({
         currentIcon,
         setNewIcon: handleChange,
         suggestions,
-        handleInput: setInputText,
+        handleInput,
       }}
     >
       {children}
@@ -43,3 +48,4 @@ StaticPicker.Grid = Grid;
 StaticPicker.CurrentIcon = CurrentIcon;
 StaticPicker.Icon = Icon;
 StaticPicker.Tooltip = Tooltip;
+StaticPicker.InputText = Input;
