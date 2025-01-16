@@ -15,7 +15,7 @@ const filterData = (inp: string) => {
   }
   return temp;
 };
-export const useFilterWithInput = (inp: string) => {
+export const useFilterWithInput = (inp: string): string[] => {
   const [result, setResult] = useState<string[]>(Object.keys(search_file));
   useEffect(() => {
     const timeId = setTimeout(() => {
