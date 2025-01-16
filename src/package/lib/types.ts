@@ -11,4 +11,7 @@ export type RemixIcon = {
 export interface StaticContextType {
   currentIcon: RemixIcon | null;
   setNewIcon: (icon: KeyRemixObject) => void;
+  inputText: string;
+  handleInput: (prev: string) => void;
+  suggestions: string[];
 }

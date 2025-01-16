@@ -7,6 +7,7 @@ import Grid from "./components/Grid";
 import CurrentIcon from "./components/CurrentIcon.tsx";
 import Icon from "./components/Icon";
 import Tooltip from "./components/Tooltip";
+import { useFilterWithInput } from "@hooks/useFilterWithInput";
 
 export function StaticPicker({
   onIconChange,
@@ -14,6 +15,9 @@ export function StaticPicker({
 }: PropsWithChildren & { onIconChange?: (icon: RemixIcon) => void }) {
   const [currentIcon, setIcon] =
     useState<StaticContextType["currentIcon"]>(null);
+  const [inputText, setInputText] =
+    useState<StaticContextType["inputText"]>("");
+  const suggestions = useFilterWithInput(inputText);
   const handleChange: StaticContextType["setNewIcon"] = (newIcon) => {
     setIcon(() => {
       const icon = getIcon(newIcon);
@@ -22,7 +26,15 @@ export function StaticPicker({
     });
   };
   return (
-    <StaticContext.Provider value={{ currentIcon, setNewIcon: handleChange }}>
+    <StaticContext.Provider
+      value={{
+        inputText,
+        currentIcon,
+        setNewIcon: handleChange,
+        suggestions,
+        handleInput: setInputText,
+      }}
+    >
       {children}
     </StaticContext.Provider>
   );
