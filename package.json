@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update-serch": "bun ./src/package/lib/update_search_file.js"
   },
   "dependencies": {
     "@remixicon/react": "^4.6.0",
