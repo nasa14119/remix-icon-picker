@@ -21,7 +21,7 @@ Este es un paquete creado con la intención de ser lo más fácil de modificar m
 ```
 
 > [!WARNING]
-> Esta guía es para utilizarlo con bun, si se gusta utilizar otro run time se debe correr manualmente el archivo en /src/package/lib/update_search_file.js de forma manual.
+> Esta guía es para utilizarlo con bun, si se gusta utilizar otro run time se debe correr manualmente el archivo en /src/package/lib/update_search_file.js de forma manual.\
 > node /src/package/lib/update_search_file.js # Ejemplo
 
 ```bash
