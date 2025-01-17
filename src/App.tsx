@@ -15,17 +15,8 @@ function App() {
             classNameLegend="absolute -bottom-10 right-0 text-black bg-white p-2 rounded-xl group-hover:visible invisible"
           />
         </div>
-        <StaticPicker.Grid className="gap-5 justify-start flex-wrap relative z-10 flex">
-          <StaticPicker.Icon
-            isFoundClass="bg-red-700/30 text-red-700 transition-all duration-30"
-            className="md:size-fit grid-rows-2 grid-cols-[auto] grid [grid-template-areas:'icon'_'text'] place-items-center"
-            classNameSVG="size-8 md:size-8 [grid-area:icon] mx-auto"
-          >
-            <StaticPicker.Tooltip
-              classNameBg="hidden"
-              classNameContainer="relative opacity-100 size-2 [grid-area:text] top-0 w-full text-center"
-            />
-          </StaticPicker.Icon>
+        <StaticPicker.Grid className="md:gap-5 justify-between relative z-10">
+          <StaticPicker.Icon isFoundClass="bg-red-700/30 text-red-700 transition-all duration-300"></StaticPicker.Icon>
         </StaticPicker.Grid>
       </StaticPicker>
     </main>
