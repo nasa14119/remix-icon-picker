@@ -22,6 +22,7 @@ const Icon = ({
   tooltipColor,
   children,
   className,
+  ...props
 }: PropsIcon) => {
   const changeIcon = useNewIcon();
   const isFound = useSuggetionsFind(id);
@@ -34,8 +35,10 @@ const Icon = ({
     return (
       <DefaultIcon
         Icon={Icon}
+        onTouchStart={handleClick}
         onClick={handleClick}
         className={cn({ [isFoundClass]: isFound }, className)}
+        {...props}
       >
         {Children.map(children, (child) =>
           cloneElement(child, { text: id, key: id })
@@ -48,7 +51,9 @@ const Icon = ({
       <DefaultIcon
         Icon={Icon}
         onClick={handleClick}
+        onTouchStart={handleClick}
         className={cn({ [isFoundClass]: isFound }, className)}
+        {...props}
       />
     );
   }
@@ -56,11 +61,13 @@ const Icon = ({
     <DefaultIcon
       Icon={Icon}
       onClick={handleClick}
+      onTouchStart={handleClick}
       className={cn(
         { ["isFound"]: isFound },
         { [isFoundClass]: isFound },
         className
       )}
+      {...props}
     >
       <DefaultTooltip text={id} style={{ color: tooltipColor || "" }} />
     </DefaultIcon>
