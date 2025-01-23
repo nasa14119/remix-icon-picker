@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { useInput, useSuggetionsWord } from "../hooks/context";
+import { useInputHandler, useSuggestionWord } from "../hooks/context";
 import {
   InputTextPicker,
   Props as ComponentProps,
@@ -7,9 +7,9 @@ import {
 import { Autosuggest } from "@components/Autosuggest";
 type Props = PropsWithChildren &
   Omit<ComponentProps, "value" | "onChange" | "onKeyDownCapture">;
-const Input = ({ children, ...props }: Props) => {
-  const { onChange } = useInput();
-  const suggestion = useSuggetionsWord();
+export const Input = ({ children, ...props }: Props) => {
+  const suggestion = useSuggestionWord();
+  const onChange = useInputHandler();
   if (!children) {
     return (
       <InputTextPicker
@@ -17,7 +17,9 @@ const Input = ({ children, ...props }: Props) => {
         onChange={onChange}
         onKeyDownCapture={(e, setValue) => {
           if (e.key === "Enter") {
+            e.preventDefault();
             if (!suggestion) return;
+            onChange(suggestion);
             setValue(suggestion);
           }
         }}
@@ -27,5 +29,3 @@ const Input = ({ children, ...props }: Props) => {
     );
   }
 };
-
-export default Input;

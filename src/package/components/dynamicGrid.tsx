@@ -1,47 +1,38 @@
-import { HTMLAttributes, memo } from "react";
+import {
+  cloneElement,
+  HTMLAttributes,
+  memo,
+  ReactElement,
+  ReactNode,
+} from "react";
 import type { RemixIcon } from "@lib/types";
 import { cn } from "@lib/utils.ts";
-import { ClassValue } from "clsx";
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   Icons: RemixIcon[] | null;
-  classNameIcons?: ClassValue;
-  classNameDescription?: ClassValue;
-  errorClasses?: ClassValue;
+  notFound?: ReactNode;
+  children: ReactElement;
 }
 
 const DynamicGridComponent = ({
   Icons,
   className,
-  errorClasses,
-  classNameIcons,
-  classNameDescription,
-  onClick,
+  notFound,
+  children,
   ...props
 }: Props) => {
   if (Icons === null) {
+    if (notFound) return <>{notFound}</>;
     return (
-      <div
-        className={cn(["flex flex-wrap", className, errorClasses])}
-        {...props}
-      >
+      <div className={cn(["flex flex-wrap", className])} {...props}>
         Not Found
       </div>
     );
   }
   return (
     <div className={cn(["flex flex-wrap", className])} {...props}>
-      {Icons.map(({ Component, key }) => (
-        <span
-          className={cn(["size-10 flex flex-col text-center", classNameIcons])}
-          onClick={onClick}
-          key={key}
-        >
-          <Component className="size-full" />
-          <span className={cn(["text-[6px] md:hidden", classNameDescription])}>
-            {key}
-          </span>
-        </span>
-      ))}
+      {Icons.map(({ Component, key }) =>
+        cloneElement(children, { id: key, Icon: Component, key })
+      )}
     </div>
   );
 };

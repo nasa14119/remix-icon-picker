@@ -1,6 +1,6 @@
 import { StaticContextType } from "@lib/types";
 import { isSimilarKey, normalizeBiggerString } from "@lib/utils";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 export const StaticContext = createContext<StaticContextType | null>(null);
 
@@ -24,20 +24,29 @@ export const useInput = () => {
     value: context.inputText,
   };
 };
-export const useSuggetionsWord = (value: string) => {
+export const useSuggetionsWord = () => {
   const context = useContext(StaticContext);
-  if (!context) throw Error("Context not found, check for parent container");
-  const { suggestions } = context;
-  if (!value) return null;
-  if (suggestions.length < 0) return null;
-  try {
-    const word = suggestions.find((now) => isSimilarKey(value, now));
-    if (!word) return null;
-    return normalizeBiggerString(value, word);
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+  const [suggestion, setSuggestion] = useState("");
+  if (!context)
+    throw Error("Error finding context check for the parent component");
+  const { inputText, suggestions: suggestionsContext } = context;
+  const suggestions = useRef<string[]>([]);
+  useEffect(() => {
+    const timeOutId = setTimeout(() => {
+      if (!inputText) return;
+      suggestions.current = [...suggestionsContext];
+      const word = suggestions.current.find((current_word) =>
+        isSimilarKey(inputText, current_word)
+      );
+      setSuggestion(() => (word ? normalizeBiggerString(inputText, word) : ""));
+    }, 500);
+    return () => {
+      setSuggestion("");
+      clearTimeout(timeOutId);
+    };
+  }, [inputText, suggestionsContext]);
+  if (!inputText) return "";
+  return suggestion;
 };
 
 export const useSuggetionsFind = (key?: string) => {

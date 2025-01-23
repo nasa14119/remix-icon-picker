@@ -15,6 +15,7 @@ export const IconSelected = ({
   id,
   defaultIcon,
   className,
+  children,
   legend = false,
   classNameLegend,
   classNameBg,
@@ -41,6 +42,7 @@ export const IconSelected = ({
       {legend && (
         <span className={cn(["text-sm", classNameLegend])}>{curretntIcon}</span>
       )}
+      {children}
     </Icon>
   );
 };

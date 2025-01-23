@@ -15,3 +15,10 @@ export interface StaticContextType {
   handleInput: (prev: string) => void;
   suggestions: string[];
 }
+
+export interface DynamicContextType {
+  currentIcon: RemixIcon | null;
+  setNewIcon: (icon: KeyRemixObject) => void;
+  inputSearch: string;
+  handleInput: (prev: string) => void;
+}

@@ -39,5 +39,3 @@ export const CurrentIcon = ({
   }
   return <IconSelected {...props} id={currentIcon} />;
 };
-
-export default CurrentIcon;

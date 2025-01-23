@@ -12,6 +12,7 @@ export const DefaultTooltip = ({
   className,
   classNameContainer,
   classNameBg,
+  style,
   ...props
 }: Props) => {
   return (
@@ -22,7 +23,10 @@ export const DefaultTooltip = ({
       ])}
       {...props}
     >
-      <span className={cn(["w-fit text-sm relative text-white", className])}>
+      <span
+        className={cn(["w-fit text-sm relative text-white", className])}
+        style={{ ...style }}
+      >
         {text}
         <span
           className={cn([
