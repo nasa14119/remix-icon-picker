@@ -9,7 +9,7 @@ import { cn } from "@lib/utils";
 export const CurrentIcon = ({
   children,
   ...props
-}: Omit<IconSelectedProps, "id"> & { children: ReactElement }) => {
+}: Omit<IconSelectedProps, "id"> & { children?: ReactElement }) => {
   const currentIcon = useCurrentIcon();
   if (currentIcon === null && children) {
     return (
